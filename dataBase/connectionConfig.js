@@ -1,9 +1,11 @@
+require('dotenv').config()
+
 module.exports = {
     database: {
-        host: 'localhost',
-        user: 'root',
-        database: 'crud_cookiessession',
-        password: 'sql12345',
-        port: 3306
+        host: process.env.HOST,
+        user: process.env.USER,
+        database: process.env.DATABASE,
+        password: process.env.PASSWORD,
+        port: process.env.PORTDB
     }
 }
