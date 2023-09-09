@@ -1,0 +1,62 @@
+<%- include('../partials/header') %>
+<%- include('./menu') %>
+
+<main class="container-fluid p-0 m-0">
+
+    <section class="container-md mt-5 px-4">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-9 bg-dark bg-opacity-75 rounded-2 p-3">
+                <form action="/editar/<% if(typeof dataProject != 'undefined'){ %><%= dataProject[0]._id_project %><% }else if(typeof id_proy != 'undefined'){ %><%= id_proy %><% } %>" method="POST">
+
+                    <div class="mb-3 form-floating">
+                        <input type="text" name="title" class="form-control" id="title" autofocus placeholder="Titulo" value="<% if(typeof dataProject != 'undefined'){ %><%= dataProject[0]._title %><% }else if(typeof values != 'undefined'){ %><%= values.title %><% } %>">
+                        <label for="title">Titulo</label>
+                        
+                        <% if(typeof error != "undefined"){ %>
+                            <% const mesage = error.find(e => e.path === 'title') %>
+                            <% if(mesage){ %>
+                                <div class="my-1 p-2 text-center alert alert-warning" role="alert">
+                                    <p class="alert-link p-0 m-0"><%= mesage.msg %></p>
+                                </div>
+                            <% } %>
+                        <% } %>
+                    </div>
+            
+                    <div class="mb-3 form-floating">
+                        <textarea class="form-control" name="description" id="description" style="max-height: 160px; min-height: 160px" placeholder="Descripcion"><% if(typeof dataProject != 'undefined'){ %><%= dataProject[0]._description %><% }else if(typeof values != 'undefined'){ %><%= values.description %><% } %></textarea>
+                        <label for="description">Descripcion</label>
+            
+                        <% if(typeof error != "undefined"){ %>
+                            <% const mesage = error.find(e => e.path === 'description') %>
+                            <% if(mesage){ %>
+                                <div class="my-1 p-2 text-center alert alert-warning" role="alert">
+                                    <p class="alert-link p-0 m-0"><%= mesage.msg %></p>
+                                </div>
+                            <% } %>
+                        <% } %>
+                    </div>
+            
+                    <div class="mb-3 form-floating">
+                        <input type="url" name="link" class="form-control" id="url" value="<% if(typeof dataProject != 'undefined'){ %><%= dataProject[0]._link %><% }else if(typeof values != 'undefined'){ %><%= values.link %><% } %>" placeholder="Link">
+                        <label for="url">Link</label>
+            
+                        <% if(typeof error != "undefined"){ %>
+                            <% const mesage = error.find(e => e.path === 'link') %>
+                            <% if(mesage){ %>
+                                <div class="my-1 p-2 text-center alert alert-warning" role="alert">
+                                    <p class="alert-link p-0 m-0"><%= mesage.msg %></p>
+                                </div>
+                            <% } %>
+                        <% } %>
+                    </div>
+                        
+                    <div class="text-center row justify-content-center">
+                        <button type="submit" class="btn btn-primary fs-5 fw-medium col-8 col-md-5">Editar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+
+<%- include('../partials/footer') %>

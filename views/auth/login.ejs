@@ -1,0 +1,54 @@
+<%- include('../partials/header') %>
+<%- include('../partials/navigation') %>
+
+<main class="container-fluid my-5 py-4 d-flex justify-content-center align-items-center">
+
+    <form action="/sesion" method="POST" class="p-1 z-3">
+        <div class="m-0 p-0 row justify-content-center align-items-center overflow-hidden text-white">
+            <div class="container col-sm-6 row row-cols-1 bg-black bg-opacity-75 p-0 m-0 justify-content-center align-items-center rounded-3 p-3">
+                
+                <div class="col mt-4">
+                    <label for="username" class="form-label">Nombre de usuario</label>
+                    <input name="username" id="username" type="text" autofocus class="form form-control" maxlength="20">
+                    <% if(typeof error != "undefined"){ %>
+                        <% const mesage = error.find(e => e.path === 'username') %>
+                        <% if(mesage){ %>
+                            <div class="my-1 p-2 text-center alert alert-warning" role="alert">
+                                <p class="alert-link p-0 m-0"><%= mesage.msg %></p>
+                            </div>
+                        <% } %>
+                    <% } %>
+                </div>
+
+                <div class="col mt-4">
+                    <label for="password" class="form-label">Contraseña</label>
+                    <input name="password" id="password" type="password" class="form form-control" maxlength="255">
+                    <% if(typeof error != "undefined"){ %>
+                        <% const mesage = error.find(e => e.path === 'password') %>
+                        <% if(mesage){ %>
+                            <div class="my-1 p-2 text-center alert alert-warning" role="alert">
+                                <p class="alert-link p-0 m-0"><%= mesage.msg %></p>
+                            </div>
+                        <% } %>
+                    <% } %>
+                </div>
+
+                <div class="col mt-4">
+                    <input type="submit" class="btn btn-primary w-100" value="Iniciar sesion">
+                </div>
+
+                <div class="col mt-4 d-flex flex-row justify-content-end">
+                    <a href="/registrarse" class="btn btn-outline-light">Crear cuenta</a>
+                </div>
+
+            </div>
+        </div>
+    </form>
+    <div class="wave">
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" class="shape-fill"></path>
+        </svg>
+    </div>
+</main>
+
+<%- include('../partials/footer') %>
