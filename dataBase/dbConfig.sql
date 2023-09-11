@@ -32,5 +32,5 @@ ON SCHEDULE EVERY 1 WEEK
 ON COMPLETION PRESERVE 
 ENABLE
     DO
-        DELETE FROM links WHERE created_at < now() - INTERVAL 30 DAY;
+        DELETE FROM links WHERE created_at < now() - INTERVAL 7 DAY;
 
