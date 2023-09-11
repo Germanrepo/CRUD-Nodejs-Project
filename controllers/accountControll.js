@@ -52,7 +52,7 @@ const register = async (req, res) => {
         //
         res.cookie('id_session', `${idSession}`, {
             httpOnly: true,
-            maxAge: 1000 * 60 * 60 * 24 * 30,
+            maxAge: 1000 * 60 * 60 * 24 * 7,
             secure: true,
         })
         res.redirect('/')
@@ -111,7 +111,7 @@ const session = async (req, res) => {
             //
             res.cookie('id_session', `${idSession}`, {
                 httpOnly: true,
-                maxAge: 1000 * 60 * 60 * 24 * 30,
+                maxAge: 1000 * 60 * 60 * 24 * 7,
                 secure: true,
             })
             return res.redirect('/')
