@@ -127,13 +127,18 @@ const session = async (req, res) => {
 
 // ============= Cerrar sesion ============
 const endSession = async (req, res) => {
-    const { id_session } = req.cookies
+    try {
+        const { id_session } = req.cookies
 
-    const queryDeleteSession = 'DELETE FROM sesions WHERE _id_session = ?'
-    await (await db).query(queryDeleteSession, [id_session])
-    res.clearCookie('id_session')
+        const queryDeleteSession = 'DELETE FROM sesions WHERE _id_session = ?'
+        await (await db).query(queryDeleteSession, [id_session])
+        res.clearCookie('id_session')
 
-    res.redirect('/')
+        res.redirect('/')
+    } catch (e) {
+        console.log(e)
+        res.send('Ha ocurrido un error')
+    }
 }
 
 module.exports = { registerVista, register, sessionVista, session, endSession }
