@@ -2,12 +2,6 @@ CREATE DATABASE crud_cookiesSession;
 
 use crud_cookiesSession;
 
-select * from users;
-select * from sesions;
-select * from projects;
-
-delete from users where _username = 'willyres';
-
 create table users(
     _id_user int not null auto_increment,
     _username varchar(50) not null,
