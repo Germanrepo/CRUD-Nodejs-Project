@@ -13,7 +13,7 @@
                     <% if(typeof error != "undefined"){ %>
                         <% const mesage = error.find(e => e.path === 'username') %>
                         <% if(mesage){ %>
-                            <div class="my-1 p-2 text-center alert alert-warning" role="alert">
+                            <div class="my-1 p-1 text-center alert alert-danger" role="alert">
                                 <p class="alert-link p-0 m-0"><%= mesage.msg %></p>
                             </div>
                         <% } %>
@@ -26,7 +26,7 @@
                     <% if(typeof error != "undefined"){ %>
                         <% const mesage = error.find(e => e.path === 'password') %>
                         <% if(mesage){ %>
-                            <div class="my-1 p-2 text-center alert alert-warning" role="alert">
+                            <div class="my-1 p-1 text-center alert alert-danger" role="alert">
                                 <p class="alert-link p-0 m-0"><%= mesage.msg %></p>
                             </div>
                         <% } %>

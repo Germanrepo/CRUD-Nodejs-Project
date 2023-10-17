@@ -13,8 +13,15 @@ const validatorRegister = [
         .isString()
         .isLength({ min: 3, max: 20 })
         .custom(async (value) => {
-            const [nameRepeat] = await (await db).query('SELECT * FROM users WHERE _username = ?', [value])
-            if (nameRepeat[0]) throw new Error('¡Nombre de usuario ya en uso!')
+            try {
+                const querySelectUsername = 'SELECT * FROM users WHERE _username = ?'
+                const [nameRepeat] = await (await db).query(querySelectUsername, [value])
+                if (nameRepeat[0]) throw new Error('origen user')
+            } catch (e) {
+                console.log(e)
+                if (e == 'Error: origen user') throw new Error('¡Nombre de usuario ya en uso!')
+                throw new Error('Ha ocurrido un error')
+            }
         }),
     body('password', '¡La constraseña debe tener minimo 8 caractares que incluyan simbolos, numeros, mayusculas y minusculas!')
         .exists()
@@ -40,9 +47,16 @@ const validatorSession = [
         .isString()
         .isLength({ min: 3, max: 20 })
         .custom(async (value) => {
-            const [user] = await (await db).query('SELECT * FROM users WHERE _username = ?', [value])
+            try {
+                const querySelectUsername = 'SELECT * FROM users WHERE _username = ?'
+                const [user] = await (await db).query(querySelectUsername, [value])
 
-            if (!user[0]) throw new Error('¡Nombre de usuario incorrecto!')
+                if (!user[0]) throw new Error('origen user')
+            } catch (e) {
+                console.log(e)
+                if (e == 'Error: origen user') throw new Error('¡Nombre de usuario incorrecto!')
+                throw new Error('Ha ocurrido un error')
+            }
         }),
     body('password', '¡Contraseña incorrecta!')
         .exists()
@@ -58,13 +72,21 @@ const validatorSession = [
         })
         .isLength({ max: 255 })
         .custom(async (value, { req }) => {
-            const { username } = req.body
+            try {
+                const { username } = req.body
 
-            const [user] = await (await db).query('SELECT * FROM users WHERE _username = ?', [username])
+                const querySelectUsername = 'SELECT * FROM users WHERE _username = ?'
+                const [user] = await (await db).query(querySelectUsername, [username])
 
-            const passwordCompaired = await bcrypt.compare(value, user[0]._password)
+                const passwordCompaired = await bcrypt.compare(value, user[0]._password)
 
-            if(!passwordCompaired) throw new Error('¡Contraseña incorrecta!')
+                if (!passwordCompaired) throw new Error('origen user')
+            } catch (e) {
+                console.log(e)
+                if (e == 'Error: origen user') throw new Error('¡Contraseña incorrecta!')
+                throw new Error('Ha ocurrido un error')
+            }
+
         })
 ]
 
